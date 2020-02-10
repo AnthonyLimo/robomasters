@@ -1,13 +1,13 @@
-#Not production code
-#Spaghetti code to get things up and running
-#If you want to see prod code, change the branh to prod
+# Not production code
+# Spaghetti code to get things up and running
+# If you want to see prod code, change the branh to prod
 
 import os
 from flask import Flask, render_template, redirect, request, jsonify, url_for
 import africastalking
 from config import Config
 
-#We need to find a way of tracking sessions
+# We need to find a way of tracking sessions
 # Flask has an inbuilt session manager
 # Allows us to also manage login/logout
 
@@ -38,9 +38,8 @@ def index():
     # Create a dictionary to hold context variables for the flask route method
     # Pass in the context as args within the render_template() method
     context = {
-        'number_in_use': number_in_use,
+        'number_in_use': _phone_number,
     }
-    number_in_use = _phone_number
     return render_template("index.html", **context)
 
 
@@ -53,7 +52,20 @@ def makecall():
         # Make multiple calls at the same time
         # I may need to integrate a DBaaS ~> Firebase
         # Check out GCP deployment strategy for Python apps
-        pass
+        # pass
+
+        # Combine contact list or provided number into dictionary
+        # Send it to AT as a dict
+        # Rethink data sources    
+
+        contact_list = []
+
+        try:
+            resp = voice.call(callFrom=_phone_number,callTo=contact_list)
+            print(resp)
+        except Exception as e:
+            print(f"Something went wrong while trying to execute these calls: ${e}")
+
     else:
         return render_template("index.html")
 

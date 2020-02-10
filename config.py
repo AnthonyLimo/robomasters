@@ -1,4 +1,4 @@
-# Create a class that exports constants
+# Create a class that exports constants and variables
 import os
 
 

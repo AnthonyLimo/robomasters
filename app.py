@@ -1,9 +1,18 @@
+#Not production code
+#Spaghetti code to get things up and running
+#If you want to see prod code, change the branh to prod
+
 import os
 from flask import Flask, render_template, redirect, request, jsonify, url_for
 import africastalking
 from config import Config
 
+#We need to find a way of tracking sessions
+# Flask has an inbuilt session manager
+# Allows us to also manage login/logout
+
 # Setting up the Africa's Talking API
+
 username = Config.AT_USERNAME
 api_key = Config.AT_APIKEY
 _phone_number = Config.AT_PHONE_NUMBER
@@ -26,8 +35,13 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 # Set up routes and logic
 @app.route("/", methods=["GET", "POST"])
 def index():
+    # Create a dictionary to hold context variables for the flask route method
+    # Pass in the context as args within the render_template() method
+    context = {
+        'number_in_use': number_in_use,
+    }
     number_in_use = _phone_number
-    return render_template("index.html", number_in_use=number_in_use)
+    return render_template("index.html", **context)
 
 
 @app.route("/makecall", methods=["GET", "POST"])

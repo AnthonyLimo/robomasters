@@ -1,7 +1,7 @@
 # Not production code
 # Spaghetti code to get things up and running
 # If you want to see prod code, change the branh to prod
-
+from app import app
 import os
 from flask import Flask, render_template, redirect, request, jsonify, url_for
 import africastalking
@@ -56,15 +56,16 @@ def makecall():
 
         # Combine contact list or provided number into dictionary
         # Send it to AT as a dict
-        # Rethink data sources    
+        # Rethink data sources
 
         contact_list = []
 
         try:
-            resp = voice.call(callFrom=_phone_number,callTo=contact_list)
+            resp = voice.call(callFrom=_phone_number, callTo=contact_list)
             print(resp)
         except Exception as e:
-            print(f"Something went wrong while trying to execute these calls: ${e}")
+            print(
+                f"Something went wrong while trying to execute these calls: ${e}")
 
     else:
         return render_template("index.html")

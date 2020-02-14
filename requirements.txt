@@ -1,2 +1,4 @@
 flask
 africastallking
+python-dotenv
+flask-wtf
